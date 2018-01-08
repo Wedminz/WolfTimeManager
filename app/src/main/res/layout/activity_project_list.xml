@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="inbox.wolf.alex.wolftimemanager.ProjectList">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/toolbar"/>
+    </android.support.v7.widget.Toolbar>
+
+    <ListView
+        android:layout_below="@id/toolbar"
+        android:id="@+id/all_project_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listheader="@layout/list_item_header"/>
+
+</RelativeLayout>

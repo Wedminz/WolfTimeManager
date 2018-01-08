@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WolfTimeManager</string>
+    <string name="all_group_time">All group time</string>
+    <string name="text_total_time">Total time</string>
+    <string name="list_item_header_time">Time</string>
+    <string name="list_item_header_project">Project</string>
+    <string name="list_item_header_description">Description</string>
+</resources>
