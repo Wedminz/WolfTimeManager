@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp">
+
+    <TextView
+        android:id="@+id/timer_description_text_view"
+        android:textAlignment="textStart"
+        style="@style/TextView.MainDescription"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ..."/>
+
+
+    <TextView
+        android:id="@+id/main_timer_counter"
+        android:text="00 : 00 : 00"
+        android:layout_below="@id/timer_description_text_view"
+        android:layout_centerHorizontal="true"
+        style="@style/TextView"
+        android:textSize="50sp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/main_timer_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/pause_btn"
+            android:text="@string/pause_btn_time_manager"
+            style="@style/Button"/>
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/stop_btn"
+            android:text="@string/stop_btn_time_manager"
+            style="@style/Button"/>
+
+    </LinearLayout>
+</RelativeLayout>
+
+</merge>

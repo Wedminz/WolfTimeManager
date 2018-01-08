@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/title_dialog"
+        android:text="@string/create_project_title_dialog"
+        style="@style/TextView.Bold"
+        android:layout_alignParentStart="true"/>
+
+    <ImageView
+        android:layout_alignParentEnd="true"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_close_black"/>
+
+    <EditText
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/set_project_name_edit_text"
+        android:layout_below="@id/title_dialog"
+        android:hint="@string/type_project_name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:id="@+id/create_group_btn"
+        android:layout_below="@id/set_project_name_edit_text"
+        android:text="@string/create_btn_create_dialog"
+        style="@style/Button"/>
+
+</RelativeLayout>

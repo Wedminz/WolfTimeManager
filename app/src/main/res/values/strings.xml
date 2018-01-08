@@ -5,4 +5,17 @@
     <string name="list_item_header_time">Time</string>
     <string name="list_item_header_project">Project</string>
     <string name="list_item_header_description">Description</string>
+
+    <string name="view_navigation_open">Open</string>
+    <string name="view_navigation_close">Close</string>
+    <string name="all_project_title_menu">All project</string>
+    <string name="create_new_project_menu">Create new project</string>
+    <string name="settings_menu">Settings</string>
+    <string name="sing_in_menu">Sing in</string>
+    <string name="pause_btn_time_manager">Pause</string>
+    <string name="stop_btn_time_manager">Stop</string>
+    <string name="create_project_title_dialog">Create project</string>
+    <string name="type_project_name_edit_text">Type project name</string>
+    <string name="create_btn_create_dialog">Create</string>
+    <string name="create_timer_btn">Create timer</string>
 </resources>
