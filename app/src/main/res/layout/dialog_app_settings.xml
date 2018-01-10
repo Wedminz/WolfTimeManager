@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/title_dialog"
+        android:text="@string/app_settings_title_dialog"
+        style="@style/TextView.Bold"
+        android:layout_alignParentStart="true"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="24dp"
+        android:id="@+id/user_avatar_image_view"
+        android:layout_below="@id/title_dialog"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="96dp"
+        android:layout_height="96dp" />
+    
+    <EditText
+        style="@style/EditText"
+        android:layout_marginTop="24dp"
+        android:id="@+id/first_user_name_edit_text"
+        android:layout_below="@id/user_avatar_image_view"
+        android:hint="@string/type_timer_description_edit_text"/>
+
+    <EditText
+        style="@style/EditText"
+        android:id="@+id/second_user_name_edit_text"
+        android:layout_below="@id/first_user_name_edit_text"
+        android:hint="@string/type_timer_description_edit_text" />
+
+    <LinearLayout
+        android:id="@+id/ll_user_e_mail"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/second_user_name_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginEnd="5dp"
+            android:text="@string/your_e_mail_text_view"
+            style="@style/TextView" />
+        
+        <TextView
+            android:text="alex.wolf.inbox@gmail.com"
+            style="@style/TextView" />
+
+    </LinearLayout>
+    
+    <Button
+        android:id="@+id/save_settings_btn"
+        android:layout_below="@id/ll_user_e_mail"
+        android:text="@string/save_settings_btn_dialog"
+        style="@style/Button.Single" />
+
+</RelativeLayout>

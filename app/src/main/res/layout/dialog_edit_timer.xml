@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/title_dialog"
+        android:text="@string/edit_timer_dialog_title"
+        style="@style/TextView.Bold"
+        android:layout_alignParentStart="true"/>
+
+    <EditText
+        style="@style/EditText"
+        android:layout_marginTop="24dp"
+        android:id="@+id/set_description_timer_edit_text"
+        android:layout_below="@id/title_dialog"
+        android:hint="@string/type_timer_description_edit_text"/>
+
+    <RelativeLayout
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:id="@+id/fragment_time_changer"
+        android:layout_below="@id/set_description_timer_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/fragment_change_time_number" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@id/fragment_time_changer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/resume_timer_btn"
+            android:text="@string/resume_timer_btn_dialog"
+            style="@style/Button" />
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/delete_timer_btn"
+            android:text="@string/delete_timer_btn_dialog"
+            style="@style/Button" />
+
+    </LinearLayout>
+
+</RelativeLayout>

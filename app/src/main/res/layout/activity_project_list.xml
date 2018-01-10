@@ -21,69 +21,24 @@
                     android:layout_height="88dp">
 
                     <include
-                        layout="@layout/toolbar"/>
+                        layout="@layout/fragment_toolbar"/>
 
                 </android.support.v7.widget.Toolbar>
 
             <RelativeLayout
-                android:layout_alignParentBottom="true"
-                android:id="@+id/main_time_manager"
+                android:id="@+id/timer_control_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp">
+                android:layout_alignParentBottom="true">
 
-                <TextView
-                    android:id="@+id/timer_description_text_view"
-                    android:textAlignment="textStart"
-                    style="@style/TextView.MainDescription"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ..."/>
+                <include
+                    layout="@layout/fragment_time_manager"/>
 
-
-                <TextView
-                    android:id="@+id/main_timer_counter"
-                    android:text="00 : 00 : 00"
-                    android:layout_below="@id/timer_description_text_view"
-                    android:layout_centerHorizontal="true"
-                    style="@style/TextView"
-                    android:textSize="50sp"
-                    android:textStyle="bold"/>
-
-                <LinearLayout
-                    android:layout_marginTop="8dp"
-                    android:layout_below="@id/main_timer_counter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_horizontal">
-
-                    <Button
-                        android:layout_weight="1"
-                        android:id="@+id/pause_btn"
-                        android:text="@string/pause_btn_time_manager"
-                        style="@style/Button"/>
-
-                    <Button
-                        android:layout_weight="1"
-                        android:id="@+id/stop_btn"
-                        android:text="@string/stop_btn_time_manager"
-                        style="@style/Button"/>
-
-                </LinearLayout>
             </RelativeLayout>
-
-            <Button
-                android:visibility="gone"
-                android:id="@+id/create_timer_btn"
-                android:layout_margin="16dp"
-                android:layout_alignParentBottom="true"
-                android:text="@string/create_timer_btn"
-                style="@style/Button"/>
 
             <ListView
                 android:id="@+id/all_project_list"
-                android:layout_above="@id/main_time_manager"
+                android:layout_above="@id/timer_control_ll"
                 android:layout_below="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -98,7 +53,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/header_navigation_view"
+        app:headerLayout="@layout/fragment_header_navigation_view"
         app:menu="@menu/navigation_menu"/>
-
 </android.support.v4.widget.DrawerLayout>

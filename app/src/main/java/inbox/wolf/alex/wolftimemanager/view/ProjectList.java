@@ -9,9 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import inbox.wolf.alex.wolftimemanager.R;
 
 public class ProjectList extends AppCompatActivity {
@@ -24,6 +26,8 @@ public class ProjectList extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.navigation)
     NavigationView navigation;
+    @BindView(R.id.rl_time_manager)
+    RelativeLayout rlTimeManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +53,10 @@ public class ProjectList extends AppCompatActivity {
                         startActivity(new Intent(ProjectList.this, CreateProject.class));
                         break;
                     case R.id.settings_profile:
+                        startActivity(new Intent(ProjectList.this, AppSettings.class));
                         break;
                     case R.id.sing_in_app:
+                        startActivity(new Intent(ProjectList.this, SingUp.class));
                         break;
                 }
                 return true;
@@ -65,5 +71,9 @@ public class ProjectList extends AppCompatActivity {
         toggle.syncState();
     }
 
+    @OnClick(R.id.create_timer_btn)
+    void onCreateTimer(){
+        startActivity(new Intent(ProjectList.this, CreateTimer.class));
+    }
 
 }

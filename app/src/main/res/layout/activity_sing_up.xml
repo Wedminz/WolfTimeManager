@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_margin="16dp">
+
+    <TextView
+        style="@style/TextView.Bold"
+        android:textAlignment="center"
+        android:text="@string/sing_up_main_title"/>
+
+    <TextView
+        style="@style/TextView.SubTitle"
+        android:textAlignment="center"
+        android:text="@string/see_how_the_sing_up"/>
+
+    <EditText
+        style="@style/EditText"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="24dp"
+        android:hint="@string/email_address_edit_text_sing_up" />
+
+    <EditText
+        style="@style/EditText"
+        android:inputType="textPersonName"
+        android:hint="@string/first_and_last_name_sing_up"/>
+
+    <EditText
+        style="@style/EditText"
+        android:inputType="textWebPassword"
+        android:hint="@string/password_sing_up" />
+
+    <Button
+        style="@style/Button.Single"
+        android:text="@string/continue_btn_sing_up"/>
+
+    <TextView
+        style="@style/TextView"
+        android:text="@string/sing_in_text_view_sing_up"/>
+
+</LinearLayout>

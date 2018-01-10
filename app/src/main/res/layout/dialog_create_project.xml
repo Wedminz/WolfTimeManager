@@ -11,27 +11,17 @@
         style="@style/TextView.Bold"
         android:layout_alignParentStart="true"/>
 
-    <ImageView
-        android:layout_alignParentEnd="true"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ic_close_black"/>
-
     <EditText
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="8dp"
+        style="@style/EditText"
+        android:layout_marginTop="24dp"
         android:id="@+id/set_project_name_edit_text"
         android:layout_below="@id/title_dialog"
-        android:hint="@string/type_project_name_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:hint="@string/type_project_name_edit_text"/>
 
     <Button
-        android:layout_marginEnd="36dp"
-        android:layout_marginStart="36dp"
         android:id="@+id/create_group_btn"
         android:layout_below="@id/set_project_name_edit_text"
         android:text="@string/create_btn_create_dialog"
-        style="@style/Button"/>
+        style="@style/Button.Single"/>
 
 </RelativeLayout>

@@ -9,6 +9,9 @@
     <style name="AppDialogTheme" parent="Base.Theme.AppCompat.Light.Dialog.MinWidth">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="TextView">
@@ -18,6 +21,11 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
+    <style name="TextView.Numbers">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">50sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <style name="TextView.Bold">
         <item name="android:textSize">@dimen/header_text_size</item>
@@ -46,6 +54,23 @@
     </style>
 
     <style name="Button">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="Button.Single">
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginStart">36dp</item>
+        <item name="android:layout_marginEnd">36dp</item>
+    </style>
+
+    <style name="ImageViewTimeChanger">
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_width">24dp</item>
+        <item name="android:src">@drawable/ic_close_black</item>
+    </style>
+
+    <style name="EditText">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
     </style>

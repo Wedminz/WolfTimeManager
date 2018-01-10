@@ -17,6 +17,14 @@
         </activity>
         <activity android:name=".view.CreateProject"
             android:theme="@style/AppDialogTheme"/>
+        <activity android:name=".view.CreateTimer"
+            android:theme="@style/AppDialogTheme"/>
+        <activity android:name=".view.AppSettings"
+            android:theme="@style/AppDialogTheme"/>
+        <activity android:name=".view.EditProject"
+            android:theme="@style/AppDialogTheme"/>
+        <activity android:name=".view.SingIn"/>
+        <activity android:name=".view.SingUp"/>
     </application>
 
 </manifest>
