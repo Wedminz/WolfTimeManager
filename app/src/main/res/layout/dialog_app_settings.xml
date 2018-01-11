@@ -25,13 +25,13 @@
         android:layout_marginTop="24dp"
         android:id="@+id/first_user_name_edit_text"
         android:layout_below="@id/user_avatar_image_view"
-        android:hint="@string/type_timer_description_edit_text"/>
+        android:hint="@string/your_first_name_app_settings"/>
 
     <EditText
         style="@style/EditText"
         android:id="@+id/second_user_name_edit_text"
         android:layout_below="@id/first_user_name_edit_text"
-        android:hint="@string/type_timer_description_edit_text" />
+        android:hint="@string/your_last_name_app_settings" />
 
     <LinearLayout
         android:id="@+id/ll_user_e_mail"

@@ -13,6 +13,7 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/add_hr"
             style="@style/ImageViewTimeChanger"/>
 
         <TextView
@@ -21,6 +22,7 @@
             android:text="00" />
 
         <ImageView
+            android:id="@+id/reduce_hr"
             style="@style/ImageViewTimeChanger"/>
 
     </LinearLayout>
@@ -42,6 +44,7 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/add_min"
             style="@style/ImageViewTimeChanger"/>
 
         <TextView
@@ -50,6 +53,7 @@
             android:text="00" />
 
         <ImageView
+            android:id="@+id/reduce_min"
             style="@style/ImageViewTimeChanger"/>
 
     </LinearLayout>
@@ -71,6 +75,7 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/add_sec"
             style="@style/ImageViewTimeChanger"/>
 
         <TextView
@@ -79,6 +84,7 @@
             android:text="00" />
 
         <ImageView
+            android:id="@+id/reduce_sec"
             style="@style/ImageViewTimeChanger"/>
 
     </LinearLayout>

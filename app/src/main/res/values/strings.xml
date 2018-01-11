@@ -42,4 +42,6 @@
     <string name="forgot_password_title_sing_in">Forgot password?</string>
     <string name="sing_in_btn">Sing In</string>
     <string name="sing_up_free_in_sing_in">Sing up free</string>
+    <string name="your_first_name_app_settings">Your first name</string>
+    <string name="your_last_name_app_settings">Your last name</string>
 </resources>
