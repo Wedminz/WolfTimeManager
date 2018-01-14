@@ -23,6 +23,8 @@
             android:theme="@style/AppDialogTheme"/>
         <activity android:name=".view.EditProject"
             android:theme="@style/AppDialogTheme"/>
+        <activity android:name=".view.EditTimer"
+            android:theme="@style/AppDialogTheme"/>
         <activity android:name=".view.SingIn"/>
         <activity android:name=".view.SingUp"/>
     </application>

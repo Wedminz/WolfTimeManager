@@ -44,4 +44,7 @@
     <string name="sing_up_free_in_sing_in">Sing up free</string>
     <string name="your_first_name_app_settings">Your first name</string>
     <string name="your_last_name_app_settings">Your last name</string>
+    <string name="project_setting_dialog_title">Project setting</string>
+    <string name="edit_btn_project_setting">Edit</string>
+    <string name="delete_btn_project_setting">Delete</string>
 </resources>

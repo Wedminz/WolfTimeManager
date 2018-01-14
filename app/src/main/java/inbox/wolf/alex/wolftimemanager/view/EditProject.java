@@ -8,7 +8,7 @@ import inbox.wolf.alex.wolftimemanager.R;
 
 public class EditProject extends AppCompatActivity {
 
-    public static final int LAYOUT = R.layout.activity_project_list;
+    public static final int LAYOUT = R.layout.dialog_edit_project;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

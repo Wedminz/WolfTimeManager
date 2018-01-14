@@ -36,13 +36,27 @@
 
             </RelativeLayout>
 
-            <ListView
-                android:id="@+id/all_project_list"
+            <LinearLayout
                 android:layout_above="@id/timer_control_ll"
                 android:layout_below="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listheader="@layout/list_item_header"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/list_item_header"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/all_project_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"/>
+
+            </LinearLayout>
+
+
 
         </RelativeLayout>
 
