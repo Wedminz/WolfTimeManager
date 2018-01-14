@@ -31,7 +31,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/create_group_btn"
+        android:id="@+id/create_time_btn"
         android:layout_below="@id/fragment_time_changer"
         android:text="@string/start_timer_btn_dialog"
         style="@style/Button.Single"/>

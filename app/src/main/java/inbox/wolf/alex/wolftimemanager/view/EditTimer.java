@@ -23,10 +23,10 @@ public class EditTimer extends AppCompatActivity {
         setContentView(LAYOUT);
         ButterKnife.bind(this);
 
-        startIntent();
+        readIntent();
     }
 
-    private void startIntent() {
+    private void readIntent() {
         Intent intent = getIntent();
         setDescription.setText(intent.getStringExtra("description"));
     }

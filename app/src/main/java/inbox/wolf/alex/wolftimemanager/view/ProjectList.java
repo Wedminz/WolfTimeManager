@@ -1,19 +1,20 @@
 package inbox.wolf.alex.wolftimemanager.view;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,10 +25,15 @@ import butterknife.OnClick;
 import inbox.wolf.alex.wolftimemanager.R;
 import inbox.wolf.alex.wolftimemanager.view.adapter.AllProjectAdapter;
 import inbox.wolf.alex.wolftimemanager.view.pojo.AllProject;
+import inbox.wolf.alex.wolftimemanager.view.timemanager.ManageTimer;
 
 public class ProjectList extends AppCompatActivity {
 
-    public static final int LAYOUT = R.layout.activity_project_list;
+    private static final int LAYOUT = R.layout.activity_project_list;
+    private static final int REQUEST_CODE_CREATE_TIMER = 1;
+
+
+
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -40,6 +46,15 @@ public class ProjectList extends AppCompatActivity {
     @BindView(R.id.all_project_list)
     RecyclerView allProjectList;
     AllProjectAdapter projectAdapter;
+    @BindView(R.id.create_timer_btn)
+    Button createTimerBtn;
+    @BindView(R.id.main_timer_counter)
+    TextView mainTimeCounter;
+    @BindView(R.id.timer_description_text_view)
+    TextView timerDescription;
+
+    ManageTimer manageTimer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +66,8 @@ public class ProjectList extends AppCompatActivity {
         navigationItemSelected();
         initRecycler();
         loadProject();
+
+        manageTimer = new ManageTimer(this);
     }
 
 
@@ -118,8 +135,29 @@ public class ProjectList extends AppCompatActivity {
 
     @OnClick(R.id.create_timer_btn)
     void onCreateTimer(){
-        startActivity(new Intent(ProjectList.this, CreateTimer.class));
+        startActivityForResult(new Intent(ProjectList.this, CreateTimer.class), REQUEST_CODE_CREATE_TIMER);
     }
+
+    @OnClick(R.id.stop_btn)
+    void onStopTimer() {
+        createTimerBtn.setVisibility(View.VISIBLE);
+        rlTimeManager.setVisibility(View.GONE);
+        manageTimer.stopTimer();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if(requestCode == REQUEST_CODE_CREATE_TIMER){
+                createTimerBtn.setVisibility(View.GONE);
+                rlTimeManager.setVisibility(View.VISIBLE);
+                timerDescription.setText(data.getStringExtra("description"));
+                manageTimer.startTimer();
+            }
+        }
+    }
+
 
     @OnClick(R.id.project_setting_btn)
     void onProjectSetting(){
@@ -130,6 +168,7 @@ public class ProjectList extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                mainTimeCounter.setText(time);
             }
         });
     }

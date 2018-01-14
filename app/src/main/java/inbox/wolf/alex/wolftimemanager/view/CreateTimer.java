@@ -1,8 +1,11 @@
 package inbox.wolf.alex.wolftimemanager.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import inbox.wolf.alex.wolftimemanager.R;
 import inbox.wolf.alex.wolftimemanager.view.timemanager.TimeChanger;
+import inbox.wolf.alex.wolftimemanager.view.timemanager.TimeConvertToLong;
 
 public class CreateTimer extends AppCompatActivity {
 
@@ -24,6 +28,8 @@ public class CreateTimer extends AppCompatActivity {
     @BindView(R.id.sec_text_view)
     TextView secTextView;
     TimeChanger timeChanger;
+    @BindView(R.id.set_description_timer_edit_text)
+    EditText descriptionEditText;
 
     @BindView(R.id.add_hr)
     ImageView addHr;
@@ -38,12 +44,21 @@ public class CreateTimer extends AppCompatActivity {
     @BindView(R.id.reduce_sec)
     ImageView reduceSec;
 
+    TimeConvertToLong convertToLong;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
         ButterKnife.bind(this);
+        init();
+    }
+
+    private void init() {
         timeChanger = new TimeChanger(time);
+        convertToLong = new TimeConvertToLong(Integer.valueOf(hrTextView.getText().toString()),
+                Integer.valueOf(minTextView.getText().toString()),
+                Integer.valueOf(secTextView.getText().toString()));
     }
 
     @OnClick(R.id.add_hr)
@@ -100,5 +115,16 @@ public class CreateTimer extends AppCompatActivity {
         hr = 0;
         min = 0;
         sec = 0;
+    }
+
+    @OnClick(R.id.create_time_btn)
+    void onCreateTimer(){
+        Intent intent = new Intent();
+        String description = descriptionEditText.getText().toString();
+        String timeLong = convertToLong.convertToLongMillis();
+        intent.putExtra("description", description);
+        intent.putExtra("timeLong", timeLong);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }
