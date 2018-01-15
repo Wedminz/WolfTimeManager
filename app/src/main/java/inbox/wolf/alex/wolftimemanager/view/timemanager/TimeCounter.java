@@ -37,7 +37,6 @@ public class TimeCounter implements Runnable {
     @SuppressLint("DefaultLocale")
     @Override
     public void run() {
-
         while (mIsRunning){
             since = System.currentTimeMillis() - mStartTime;
             int seconds = (int)((since / 1000)%60);
@@ -47,6 +46,5 @@ public class TimeCounter implements Runnable {
                     "%02d : %02d : %02d", hours, minutes, seconds
             ), since);
         }
-
     }
 }

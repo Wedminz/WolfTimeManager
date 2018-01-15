@@ -51,11 +51,9 @@ public class CreateTimer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
         ButterKnife.bind(this);
-        init();
     }
 
-    private void init() {
-        timeChanger = new TimeChanger(time);
+    private void convertToLongTimer() {
         convertToLong = new TimeConvertToLong(Integer.valueOf(hrTextView.getText().toString()),
                 Integer.valueOf(minTextView.getText().toString()),
                 Integer.valueOf(secTextView.getText().toString()));
@@ -63,6 +61,7 @@ public class CreateTimer extends AppCompatActivity {
 
     @OnClick(R.id.add_hr)
     void onAddHr(){
+        timeChanger = new TimeChanger(hr);
         if(timeChanger.addTime(99, addHr, reduceHr)){
             timeChanger.setTime(++hr);
             hrTextView.setText(timeChanger.getFormatTime());
@@ -71,6 +70,7 @@ public class CreateTimer extends AppCompatActivity {
 
     @OnClick(R.id.reduce_hr)
     void onReduceHr(){
+        timeChanger = new TimeChanger(hr);
         if(timeChanger.reduceTime(reduceHr, addHr)){
             timeChanger.setTime(--hr);
             hrTextView.setText(timeChanger.getFormatTime());
@@ -79,6 +79,7 @@ public class CreateTimer extends AppCompatActivity {
 
     @OnClick(R.id.add_min)
     void onAddMin(){
+        timeChanger = new TimeChanger(min);
         if(timeChanger.addTime(60, addMin, reduceMin)){
             timeChanger.setTime(++min);
             minTextView.setText(timeChanger.getFormatTime());
@@ -87,6 +88,7 @@ public class CreateTimer extends AppCompatActivity {
 
     @OnClick(R.id.reduce_min)
     void onReduceMin(){
+        timeChanger = new TimeChanger(min);
         if(timeChanger.reduceTime(reduceMin, addMin)){
             timeChanger.setTime(--min);
             minTextView.setText(timeChanger.getFormatTime());
@@ -95,6 +97,7 @@ public class CreateTimer extends AppCompatActivity {
 
     @OnClick(R.id.add_sec)
     void onAddSec(){
+        timeChanger = new TimeChanger(sec);
         if(timeChanger.addTime(60, addSec, reduceSec)){
             timeChanger.setTime(++sec);
             secTextView.setText(timeChanger.getFormatTime());
@@ -103,10 +106,23 @@ public class CreateTimer extends AppCompatActivity {
 
     @OnClick(R.id.reduce_sec)
     void onReduceSec(){
+        timeChanger = new TimeChanger(sec);
         if(timeChanger.reduceTime(reduceSec, addSec)){
             timeChanger.setTime(--sec);
             secTextView.setText(timeChanger.getFormatTime());
         }
+    }
+
+    @OnClick(R.id.create_time_btn)
+    void onCreateTimer(){
+        Intent intent = new Intent();
+        String description = descriptionEditText.getText().toString();
+        convertToLongTimer();
+        String timeLong = convertToLong.convertToLongMillis();
+        intent.putExtra("description", description);
+        intent.putExtra("timeLong", timeLong);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override
@@ -115,16 +131,5 @@ public class CreateTimer extends AppCompatActivity {
         hr = 0;
         min = 0;
         sec = 0;
-    }
-
-    @OnClick(R.id.create_time_btn)
-    void onCreateTimer(){
-        Intent intent = new Intent();
-        String description = descriptionEditText.getText().toString();
-        String timeLong = convertToLong.convertToLongMillis();
-        intent.putExtra("description", description);
-        intent.putExtra("timeLong", timeLong);
-        setResult(RESULT_OK, intent);
-        finish();
     }
 }

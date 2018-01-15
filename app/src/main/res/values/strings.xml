@@ -47,4 +47,5 @@
     <string name="project_setting_dialog_title">Project setting</string>
     <string name="edit_btn_project_setting">Edit</string>
     <string name="delete_btn_project_setting">Delete</string>
+    <string name="resume_timer_btn">Resume</string>
 </resources>

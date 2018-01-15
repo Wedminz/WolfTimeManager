@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,14 +28,17 @@ import inbox.wolf.alex.wolftimemanager.R;
 import inbox.wolf.alex.wolftimemanager.view.adapter.AllProjectAdapter;
 import inbox.wolf.alex.wolftimemanager.view.pojo.AllProject;
 import inbox.wolf.alex.wolftimemanager.view.timemanager.ManageTimer;
+import inbox.wolf.alex.wolftimemanager.view.view.TimerControlsVisibility;
 
 public class ProjectList extends AppCompatActivity {
 
     private static final int LAYOUT = R.layout.activity_project_list;
     private static final int REQUEST_CODE_CREATE_TIMER = 1;
+    private static final int REQUEST_CODE_EDIT_TIMER = 2;
 
-
-
+    boolean pause = true;
+    ManageTimer manageTimer;
+    TimerControlsVisibility controlsVisibility;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -52,8 +57,9 @@ public class ProjectList extends AppCompatActivity {
     TextView mainTimeCounter;
     @BindView(R.id.timer_description_text_view)
     TextView timerDescription;
+    @BindView(R.id.pause_btn)
+    Button pauseTimer;
 
-    ManageTimer manageTimer;
 
 
     @Override
@@ -66,8 +72,8 @@ public class ProjectList extends AppCompatActivity {
         navigationItemSelected();
         initRecycler();
         loadProject();
-
         manageTimer = new ManageTimer(this);
+        controlsVisibility = new TimerControlsVisibility(createTimerBtn, rlTimeManager);
     }
 
 
@@ -78,7 +84,7 @@ public class ProjectList extends AppCompatActivity {
             public void onProjectClick(AllProject allProject) {
                 intent.putExtra("description", allProject.getDescription());
                 intent.putExtra("time", allProject.getTime());
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_EDIT_TIMER);
             }
         };
 
@@ -140,8 +146,7 @@ public class ProjectList extends AppCompatActivity {
 
     @OnClick(R.id.stop_btn)
     void onStopTimer() {
-        createTimerBtn.setVisibility(View.VISIBLE);
-        rlTimeManager.setVisibility(View.GONE);
+        controlsVisibility.buttonVisibility();
         manageTimer.stopTimer();
     }
 
@@ -149,11 +154,11 @@ public class ProjectList extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
-            if(requestCode == REQUEST_CODE_CREATE_TIMER){
-                createTimerBtn.setVisibility(View.GONE);
-                rlTimeManager.setVisibility(View.VISIBLE);
+            if(requestCode == REQUEST_CODE_CREATE_TIMER || requestCode == REQUEST_CODE_EDIT_TIMER){
+                controlsVisibility.layoutVisibility();
                 timerDescription.setText(data.getStringExtra("description"));
-                manageTimer.startTimer();
+                long timeLong = Long.parseLong(data.getStringExtra("timeLong"));
+                manageTimer.customTimer(timeLong);
             }
         }
     }
@@ -171,5 +176,18 @@ public class ProjectList extends AppCompatActivity {
                 mainTimeCounter.setText(time);
             }
         });
+    }
+
+    @OnClick(R.id.pause_btn)
+    void onPauseTimer(){
+        if(pause){
+            manageTimer.pauseTimer();
+            pauseTimer.setText(R.string.resume_timer_btn);
+        }
+        else{
+            manageTimer.pauseResumeTimer();
+            pauseTimer.setText(R.string.pause_btn_time_manager);
+        }
+        pause = !pause;
     }
 }
