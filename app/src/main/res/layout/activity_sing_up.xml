@@ -18,26 +18,31 @@
         android:text="@string/see_how_the_sing_up"/>
 
     <EditText
+        android:id="@+id/email_edit_text"
         style="@style/EditText"
         android:inputType="textEmailAddress"
         android:layout_marginTop="24dp"
         android:hint="@string/email_address_edit_text_sing_up" />
 
     <EditText
+        android:id="@+id/first_last_edit_text"
         style="@style/EditText"
         android:inputType="textPersonName"
         android:hint="@string/first_and_last_name_sing_up"/>
 
     <EditText
+        android:id="@+id/password_edit_text"
         style="@style/EditText"
         android:inputType="textWebPassword"
         android:hint="@string/password_sing_up" />
 
     <Button
+        android:id="@+id/registration_btn"
         style="@style/Button.Single"
         android:text="@string/continue_btn_sing_up"/>
 
     <TextView
+        android:id="@+id/sing_in_btn"
         style="@style/TextView"
         android:text="@string/sing_in_text_view_sing_up"/>
 

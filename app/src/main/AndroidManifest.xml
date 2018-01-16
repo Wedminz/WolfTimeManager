@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="inbox.wolf.alex.wolftimemanager">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,24 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ProjectList">
+        <activity android:name=".main.activity.ProjectList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.CreateProject"
+        <activity android:name=".main.activity.CreateProject"
             android:theme="@style/AppDialogTheme"/>
-        <activity android:name=".view.CreateTimer"
+        <activity android:name=".main.activity.CreateTimer"
             android:theme="@style/AppDialogTheme"/>
-        <activity android:name=".view.AppSettings"
+        <activity android:name=".main.activity.AppSettings"
             android:theme="@style/AppDialogTheme"/>
-        <activity android:name=".view.EditProject"
+        <activity android:name=".main.activity.ResetPassword"
             android:theme="@style/AppDialogTheme"/>
-        <activity android:name=".view.EditTimer"
+        <activity android:name=".main.activity.EditProject"
             android:theme="@style/AppDialogTheme"/>
-        <activity android:name=".view.SingIn"/>
-        <activity android:name=".view.SingUp"/>
+        <activity android:name=".main.activity.EditTimer"
+            android:theme="@style/AppDialogTheme"/>
+        <activity android:name=".main.activity.SingIn"/>
+        <activity android:name=".main.activity.SingUp"/>
     </application>
 
 </manifest>

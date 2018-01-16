@@ -1,8 +1,8 @@
-package inbox.wolf.alex.wolftimemanager.view.timemanager;
+package inbox.wolf.alex.wolftimemanager.main.timemanager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import inbox.wolf.alex.wolftimemanager.view.ProjectList;
+import inbox.wolf.alex.wolftimemanager.main.activity.ProjectList;
 
 public class TimeCounter implements Runnable {
 

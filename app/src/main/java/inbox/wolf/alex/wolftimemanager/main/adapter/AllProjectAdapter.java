@@ -1,4 +1,4 @@
-package inbox.wolf.alex.wolftimemanager.view.adapter;
+package inbox.wolf.alex.wolftimemanager.main.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import inbox.wolf.alex.wolftimemanager.R;
-import inbox.wolf.alex.wolftimemanager.view.pojo.AllProject;
+import inbox.wolf.alex.wolftimemanager.main.pojo.AllProject;
 
 public class AllProjectAdapter extends RecyclerView.Adapter<AllProjectAdapter.AllProjectViewHolder> {
 

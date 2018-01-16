@@ -48,4 +48,17 @@
     <string name="edit_btn_project_setting">Edit</string>
     <string name="delete_btn_project_setting">Delete</string>
     <string name="resume_timer_btn">Resume</string>
+    <string name="validation_text_empty">Email and password can not be empty</string>
+    <string name="required_field">Required field</string>
+    <string name="week_password_validation">Week password</string>
+    <string name="error_invalid_email_validation">Error invalid email</string>
+    <string name="user_exists_validation">User exists</string>
+    <string name="sing_out">Sing out</string>
+    <string name="validate_login_form">Wrong login or password</string>
+    <string name="validate_login_form_no_exist_user">This user is not registered</string>
+    <string name="reset_password_title">Reset password</string>
+    <string name="type_your_e_mail">Type your e-mail</string>
+    <string name="reset_password_btn">Reset</string>
+    <string name="wrong_email_format_reset_password">Wrong e-mail format</string>
+    <string name="text_reset_password">A letter with a link to reset your password has been sent</string>
 </resources>

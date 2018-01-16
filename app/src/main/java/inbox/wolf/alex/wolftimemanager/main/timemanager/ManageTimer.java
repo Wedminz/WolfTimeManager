@@ -1,4 +1,4 @@
-package inbox.wolf.alex.wolftimemanager.view.timemanager;
+package inbox.wolf.alex.wolftimemanager.main.timemanager;
 
 import android.content.Context;
 

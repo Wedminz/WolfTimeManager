@@ -1,10 +1,9 @@
-package inbox.wolf.alex.wolftimemanager.view;
+package inbox.wolf.alex.wolftimemanager.main.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,8 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import inbox.wolf.alex.wolftimemanager.R;
-import inbox.wolf.alex.wolftimemanager.view.timemanager.TimeChanger;
-import inbox.wolf.alex.wolftimemanager.view.timemanager.TimeConvertToLong;
+import inbox.wolf.alex.wolftimemanager.main.timemanager.TimeChanger;
+import inbox.wolf.alex.wolftimemanager.main.timemanager.TimeConvertToLong;
 
 public class CreateTimer extends AppCompatActivity {
 

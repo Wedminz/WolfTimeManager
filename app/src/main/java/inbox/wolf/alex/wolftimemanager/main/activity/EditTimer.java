@@ -1,4 +1,4 @@
-package inbox.wolf.alex.wolftimemanager.view;
+package inbox.wolf.alex.wolftimemanager.main.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import inbox.wolf.alex.wolftimemanager.R;
-import inbox.wolf.alex.wolftimemanager.view.timemanager.TimeChanger;
-import inbox.wolf.alex.wolftimemanager.view.timemanager.TimeConvertToLong;
+import inbox.wolf.alex.wolftimemanager.main.timemanager.TimeChanger;
+import inbox.wolf.alex.wolftimemanager.main.timemanager.TimeConvertToLong;
 
 public class EditTimer extends AppCompatActivity {
 

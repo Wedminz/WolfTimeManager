@@ -1,4 +1,4 @@
-package inbox.wolf.alex.wolftimemanager.view;
+package inbox.wolf.alex.wolftimemanager.main.activity;
 
 
 import android.os.Bundle;

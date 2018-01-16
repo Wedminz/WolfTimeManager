@@ -1,4 +1,4 @@
-package inbox.wolf.alex.wolftimemanager.view.pojo;
+package inbox.wolf.alex.wolftimemanager.main.pojo;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package inbox.wolf.alex.wolftimemanager.view;
+package inbox.wolf.alex.wolftimemanager.main.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,25 +10,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import inbox.wolf.alex.wolftimemanager.R;
-import inbox.wolf.alex.wolftimemanager.view.adapter.AllProjectAdapter;
-import inbox.wolf.alex.wolftimemanager.view.pojo.AllProject;
-import inbox.wolf.alex.wolftimemanager.view.timemanager.ManageTimer;
-import inbox.wolf.alex.wolftimemanager.view.view.TimerControlsVisibility;
+import inbox.wolf.alex.wolftimemanager.main.adapter.AllProjectAdapter;
+import inbox.wolf.alex.wolftimemanager.main.auth.EmailAuth;
+import inbox.wolf.alex.wolftimemanager.main.pojo.AllProject;
+import inbox.wolf.alex.wolftimemanager.main.timemanager.ManageTimer;
+import inbox.wolf.alex.wolftimemanager.main.view.TimerControlsVisibility;
 
 public class ProjectList extends AppCompatActivity {
 
@@ -39,6 +37,7 @@ public class ProjectList extends AppCompatActivity {
     boolean pause = true;
     ManageTimer manageTimer;
     TimerControlsVisibility controlsVisibility;
+    EmailAuth emailAuth;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -60,7 +59,11 @@ public class ProjectList extends AppCompatActivity {
     @BindView(R.id.pause_btn)
     Button pauseTimer;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +71,16 @@ public class ProjectList extends AppCompatActivity {
         setContentView(LAYOUT);
         ButterKnife.bind(this);
 
+        emailAuth = new EmailAuth(this);
+        emailAuth.getCurrUser();
+
         barDrawerToggle();
         navigationItemSelected();
         initRecycler();
         loadProject();
         manageTimer = new ManageTimer(this);
         controlsVisibility = new TimerControlsVisibility(createTimerBtn, rlTimeManager);
+
     }
 
 
@@ -124,7 +131,7 @@ public class ProjectList extends AppCompatActivity {
                         startActivity(new Intent(ProjectList.this, AppSettings.class));
                         break;
                     case R.id.sing_in_app:
-                        startActivity(new Intent(ProjectList.this, SingUp.class));
+                        emailAuth.singOut();
                         break;
                 }
                 return true;

@@ -1,4 +1,4 @@
-package inbox.wolf.alex.wolftimemanager.view.view;
+package inbox.wolf.alex.wolftimemanager.main.view;
 
 import android.view.View;
 import android.widget.Button;
