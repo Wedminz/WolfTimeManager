@@ -6,8 +6,8 @@ import android.widget.RelativeLayout;
 
 public class TimerControlsVisibility {
 
-    Button button;
-    RelativeLayout layout;
+    private Button button;
+    private RelativeLayout layout;
 
     public TimerControlsVisibility(Button button, RelativeLayout layout) {
         this.button = button;

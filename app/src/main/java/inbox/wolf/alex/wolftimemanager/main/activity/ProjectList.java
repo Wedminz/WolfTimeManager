@@ -24,6 +24,8 @@ import butterknife.OnClick;
 import inbox.wolf.alex.wolftimemanager.R;
 import inbox.wolf.alex.wolftimemanager.main.adapter.AllProjectAdapter;
 import inbox.wolf.alex.wolftimemanager.main.auth.EmailAuth;
+import inbox.wolf.alex.wolftimemanager.main.data.CreateGroupWriter;
+import inbox.wolf.alex.wolftimemanager.main.data.MenuReader;
 import inbox.wolf.alex.wolftimemanager.main.pojo.AllProject;
 import inbox.wolf.alex.wolftimemanager.main.timemanager.ManageTimer;
 import inbox.wolf.alex.wolftimemanager.main.view.TimerControlsVisibility;
@@ -33,11 +35,14 @@ public class ProjectList extends AppCompatActivity {
     private static final int LAYOUT = R.layout.activity_project_list;
     private static final int REQUEST_CODE_CREATE_TIMER = 1;
     private static final int REQUEST_CODE_EDIT_TIMER = 2;
+    private static final int REQUEST_CODE_CREATE_PROJECT = 3;
 
     boolean pause = true;
     ManageTimer manageTimer;
     TimerControlsVisibility controlsVisibility;
     EmailAuth emailAuth;
+    CreateGroupWriter createGroupWriter;
+    MenuReader menuReader;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -59,6 +64,7 @@ public class ProjectList extends AppCompatActivity {
     @BindView(R.id.pause_btn)
     Button pauseTimer;
 
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -72,7 +78,7 @@ public class ProjectList extends AppCompatActivity {
         ButterKnife.bind(this);
 
         emailAuth = new EmailAuth(this);
-        emailAuth.getCurrUser();
+        emailAuth.getSingInUser();
 
         barDrawerToggle();
         navigationItemSelected();
@@ -80,6 +86,9 @@ public class ProjectList extends AppCompatActivity {
         loadProject();
         manageTimer = new ManageTimer(this);
         controlsVisibility = new TimerControlsVisibility(createTimerBtn, rlTimeManager);
+        createGroupWriter = new CreateGroupWriter();
+        menuReader = new MenuReader(navigation, emailAuth.getUserUid());
+        menuReader.postListener();
 
     }
 
@@ -125,7 +134,7 @@ public class ProjectList extends AppCompatActivity {
                         ProjectList.super.onOptionsItemSelected(item);
                         break;
                     case R.id.create_new_project:
-                        startActivity(new Intent(ProjectList.this, CreateProject.class));
+                        startActivityForResult(new Intent(ProjectList.this, CreateProject.class), REQUEST_CODE_CREATE_PROJECT);
                         break;
                     case R.id.settings_profile:
                         startActivity(new Intent(ProjectList.this, AppSettings.class));
@@ -166,6 +175,8 @@ public class ProjectList extends AppCompatActivity {
                 timerDescription.setText(data.getStringExtra("description"));
                 long timeLong = Long.parseLong(data.getStringExtra("timeLong"));
                 manageTimer.customTimer(timeLong);
+            } else if(requestCode == REQUEST_CODE_CREATE_PROJECT) {
+                createGroupWriter.writeProject(emailAuth.getUserUid(), data.getStringExtra("projectName"));
             }
         }
     }

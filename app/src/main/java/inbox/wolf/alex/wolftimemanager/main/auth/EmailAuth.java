@@ -11,6 +11,7 @@ import inbox.wolf.alex.wolftimemanager.main.activity.SingIn;
 public class EmailAuth {
 
     private FirebaseAuth auth;
+    FirebaseUser user;
     private Context context;
 
     public EmailAuth(Context context) {
@@ -21,13 +22,22 @@ public class EmailAuth {
         auth = FirebaseAuth.getInstance();
     }
 
-    public void getCurrUser(){
+    private void getCurrUser() {
+        user = FirebaseAuth.getInstance().getCurrentUser();
+    }
+
+    public void getSingInUser(){
         getUser();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        getCurrUser();
         if(user == null) {
             context.startActivity(new Intent(context, SingIn.class));
             ((Activity)context).finish();
         }
+    }
+
+    public String getUserUid() {
+        getCurrUser();
+        return user.getUid();
     }
 
     public void singOut(){
