@@ -3,6 +3,7 @@ package inbox.wolf.alex.wolftimemanager.main.auth;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,13 +32,17 @@ public class EmailAuth {
         getCurrUser();
         if(user == null) {
             context.startActivity(new Intent(context, SingIn.class));
+            Log.d("myLog", "null!");
             ((Activity)context).finish();
         }
     }
 
     public String getUserUid() {
         getCurrUser();
-        return user.getUid();
+        if(user == null)
+            return "";
+        else
+            return user.getUid();
     }
 
     public void singOut(){

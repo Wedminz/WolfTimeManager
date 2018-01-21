@@ -61,4 +61,10 @@
     <string name="reset_password_btn">Reset</string>
     <string name="wrong_email_format_reset_password">Wrong e-mail format</string>
     <string name="text_reset_password">A letter with a link to reset your password has been sent</string>
+    <string name="project_notify">Project</string>
+    <string name="success_delete_notify">success delete</string>
+    <string name="can_not_be_empty">The field can not be empty</string>
+    <string name="delete_dialog_in_project_edit">You want to delete the project and all the time in it. Are you sure?</string>
+    <string name="yes_btn">Yes</string>
+    <string name="no_btn">No</string>
 </resources>

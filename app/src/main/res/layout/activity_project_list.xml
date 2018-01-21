@@ -67,6 +67,5 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/fragment_header_navigation_view"
-        app:menu="@menu/navigation_menu"/>
+        app:headerLayout="@layout/fragment_header_navigation_view" />
 </android.support.v4.widget.DrawerLayout>

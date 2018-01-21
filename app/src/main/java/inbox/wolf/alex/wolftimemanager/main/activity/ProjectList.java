@@ -2,7 +2,6 @@ package inbox.wolf.alex.wolftimemanager.main.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,8 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +27,7 @@ import inbox.wolf.alex.wolftimemanager.main.data.CreateGroupWriter;
 import inbox.wolf.alex.wolftimemanager.main.data.MenuReader;
 import inbox.wolf.alex.wolftimemanager.main.pojo.AllProject;
 import inbox.wolf.alex.wolftimemanager.main.timemanager.ManageTimer;
+import inbox.wolf.alex.wolftimemanager.main.view.ProjectSettingVisibility;
 import inbox.wolf.alex.wolftimemanager.main.view.TimerControlsVisibility;
 
 public class ProjectList extends AppCompatActivity {
@@ -36,6 +36,8 @@ public class ProjectList extends AppCompatActivity {
     private static final int REQUEST_CODE_CREATE_TIMER = 1;
     private static final int REQUEST_CODE_EDIT_TIMER = 2;
     private static final int REQUEST_CODE_CREATE_PROJECT = 3;
+    private static final int REQUEST_CODE_EDIT_GROUP = 4;
+    private static final int EDIT_PROJECT_NAME = 10;
 
     boolean pause = true;
     ManageTimer manageTimer;
@@ -43,6 +45,7 @@ public class ProjectList extends AppCompatActivity {
     EmailAuth emailAuth;
     CreateGroupWriter createGroupWriter;
     MenuReader menuReader;
+    ProjectSettingVisibility projectSettingVisibility;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -63,6 +66,11 @@ public class ProjectList extends AppCompatActivity {
     TextView timerDescription;
     @BindView(R.id.pause_btn)
     Button pauseTimer;
+    @BindView(R.id.all_project_title)
+    TextView allProjectTitle;
+    @BindView(R.id.project_setting_btn)
+    ImageView projectSettingBtn;
+
 
 
     @Override
@@ -79,19 +87,23 @@ public class ProjectList extends AppCompatActivity {
 
         emailAuth = new EmailAuth(this);
         emailAuth.getSingInUser();
-
+        menuReader = new MenuReader(navigation, drawerLayout, this, REQUEST_CODE_CREATE_PROJECT,
+                emailAuth.getUserUid(), allProjectTitle);
+        menuReader.postListener();
         barDrawerToggle();
-        navigationItemSelected();
         initRecycler();
         loadProject();
-        manageTimer = new ManageTimer(this);
-        controlsVisibility = new TimerControlsVisibility(createTimerBtn, rlTimeManager);
-        createGroupWriter = new CreateGroupWriter();
-        menuReader = new MenuReader(navigation, emailAuth.getUserUid());
-        menuReader.postListener();
+        init();
 
     }
 
+    private void init() {
+        manageTimer = new ManageTimer(this);
+        controlsVisibility = new TimerControlsVisibility(createTimerBtn, rlTimeManager);
+        createGroupWriter = new CreateGroupWriter();
+        projectSettingVisibility = new ProjectSettingVisibility(allProjectTitle, projectSettingBtn, this);
+        projectSettingVisibility.addTextChangedListener();
+    }
 
     private void initRecycler(){
         final Intent intent = new Intent(this, EditTimer.class);
@@ -124,30 +136,6 @@ public class ProjectList extends AppCompatActivity {
         );
     }
 
-    private void navigationItemSelected() {
-        navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                drawerLayout.closeDrawers();
-                switch (item.getItemId()){
-                    case R.id.all_project_list:
-                        ProjectList.super.onOptionsItemSelected(item);
-                        break;
-                    case R.id.create_new_project:
-                        startActivityForResult(new Intent(ProjectList.this, CreateProject.class), REQUEST_CODE_CREATE_PROJECT);
-                        break;
-                    case R.id.settings_profile:
-                        startActivity(new Intent(ProjectList.this, AppSettings.class));
-                        break;
-                    case R.id.sing_in_app:
-                        emailAuth.singOut();
-                        break;
-                }
-                return true;
-            }
-        });
-    }
-
     private void barDrawerToggle() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.view_navigation_open
                 , R.string.view_navigation_close);
@@ -176,15 +164,23 @@ public class ProjectList extends AppCompatActivity {
                 long timeLong = Long.parseLong(data.getStringExtra("timeLong"));
                 manageTimer.customTimer(timeLong);
             } else if(requestCode == REQUEST_CODE_CREATE_PROJECT) {
-                createGroupWriter.writeProject(emailAuth.getUserUid(), data.getStringExtra("projectName"));
+                createGroupWriter.writePojoProject(emailAuth.getUserUid(), data.getStringExtra("projectName"));
+            } else if(requestCode == REQUEST_CODE_EDIT_GROUP) {
+                menuReader.delete();
             }
+        } else if(resultCode == EDIT_PROJECT_NAME) {
+            String title = data.getStringExtra("title");
+            if(!title.equals(""))
+                menuReader.update(title);
         }
     }
 
 
     @OnClick(R.id.project_setting_btn)
     void onProjectSetting(){
-        startActivity(new Intent(ProjectList.this, EditProject.class));
+        Intent intent = new Intent(ProjectList.this, EditProject.class);
+        intent.putExtra("title", allProjectTitle.getText().toString());
+        startActivityForResult(intent, REQUEST_CODE_EDIT_GROUP);
     }
 
     public void setTimeCounter(final String time, final long longTime){

@@ -1,50 +1,84 @@
 package inbox.wolf.alex.wolftimemanager.main.data;
 
+import android.content.Context;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MenuReader {
+import java.util.HashMap;
+import java.util.Map;
 
-    private NavigationView navigationView;
-    private String userId;
-    private String menuTitle;
+import inbox.wolf.alex.wolftimemanager.main.menu.MenuCreate;
+import inbox.wolf.alex.wolftimemanager.main.pojo.ProjectGroup;
+
+public class MenuReader{
+
     private Menu menu;
+    private NavigationView navigationView;
+    private String menuTitle, userUid, key;
+    private MenuCreate menuCreate;
+    private DrawerLayout drawerLayout;
+    private Context context;
+    private int requestCreateGroup;
+    private TextView titleList;
+    private Button button;
 
-    public MenuReader(NavigationView navigationView, String userId) {
+    public MenuReader(Button button, Context context) {
+        this.button = button;
+        this.context = context;
+    }
+
+    public MenuReader(NavigationView navigationView,
+                      DrawerLayout drawerLayout, Context context, int requestCreateGroup,
+                      String userUid, TextView titleList) {
         this.navigationView = navigationView;
-        this.userId = userId;
+        this.drawerLayout = drawerLayout;
+        this.context = context;
+        this.requestCreateGroup = requestCreateGroup;
+        this.userUid = userUid;
+        this.titleList = titleList;
     }
 
     public void postListener() {
         menu = navigationView.getMenu();
+        menuCreate = new MenuCreate();
+
         FirebaseDatabase.getInstance().getReference()
                 .child("user")
-                .child(userId)
-                .child("project")
-                .addValueEventListener(new ValueEventListener() {
+                .child(userUid)
+                .child("project").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 menu.clear();
-                menu.add(1, 0, 0, "All project").setChecked(true).setCheckable(true);
+                menuCreate.menuCreator(menu, navigationView, drawerLayout, context, requestCreateGroup, titleList);
                 for (DataSnapshot u : dataSnapshot.getChildren()){
-                    menuTitle = u.getKey();
-                    menu.add(1, 0, 1, menuTitle).setCheckable(true).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                    ProjectGroup projectGroup = new ProjectGroup();
+                    projectGroup.setTitle(u.getValue(ProjectGroup.class).getTitle());
+                    menuTitle = projectGroup.getTitle();
+
+                    menu.add(1, 0, 1, menuTitle).setCheckable(true).
+                            setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             menuTitle = menuItem.getTitle().toString();
+                            titleList.setText(menuItem.toString());
                             return false;
                         }
                     });
+                    key = u.getKey();
+
+
                 }
-                menu.add(2, 0, 2, "Create new project");
-                menu.add(2, 0, 2, "Settings");
-                menu.add(2, 0, 2, "Sing in");
+                menuCreate.defaultClick(menu, titleList);
+
             }
 
             @Override
@@ -54,10 +88,29 @@ public class MenuReader {
         });
     }
 
-    public void menuCreator() {
-        menu.add(1, 0, 1, "All project");
-        menu.add(2, 0, 0, "Create new project");
-        menu.add(2, 0, 0, "Settings");
-        menu.add(2, 0, 0, "Sing in");
+    public void delete() {
+        DeleteGroup deleteGroup = new DeleteGroup();
+        deleteGroup.delete(key, FirebaseDatabase.getInstance().getReference()
+                .child("user")
+                .child(userUid)
+                .child("project"));
     }
+
+    public void update(String title) {
+        ProjectGroup projectGroup = new ProjectGroup(title, key);
+        Map<String, Object> value = projectGroup.toMap();
+        Map<String, Object> childUpdate = new HashMap<>();
+        childUpdate.put(key, value);
+        FirebaseDatabase.getInstance().getReference()
+                .child("user")
+                .child(userUid)
+                .child("project")
+                .updateChildren(childUpdate);
+    }
+
+
+
+
+
+
 }

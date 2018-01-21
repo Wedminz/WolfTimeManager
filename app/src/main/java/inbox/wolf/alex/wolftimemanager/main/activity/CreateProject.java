@@ -36,7 +36,7 @@ public class CreateProject extends AppCompatActivity {
             setResult(RESULT_OK, intent);
             finish();
         }else {
-            projectEt.setError(getString(R.string.validation_text_empty));
+            projectEt.setError(getString(R.string.can_not_be_empty));
         }
 
     }
